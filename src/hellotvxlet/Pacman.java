@@ -43,7 +43,6 @@ public class Pacman {
     }
     
     public boolean hasCollided(){
-  
         return false;
     }
     

@@ -1,10 +1,10 @@
 Signature-Version: 1.0
 Created-By: 1.6.0_16 (Sun Microsystems Inc.)
 BDJ-Signature-Version: 1.0
-SHA1-Digest-Manifest: G6MjZZHqHtsynJT0Ms0exCH4Obg=
+SHA1-Digest-Manifest: L3YCC6bT9krqBpJAQC5ycowB9OY=
 
 Name: hellotvxlet/HelloTVXlet.class
-SHA1-Digest: qcik9ZfZAmkWvi6arv8mSpkvHxo=
+SHA1-Digest: t+bXKEu2taj1MPZ1OfUE7pF+qxI=
 
 Name: hellotvxlet/HelloTVXlet$1.class
 SHA1-Digest: jL4rl+dtvgbj4VErj8qjkXfGCe4=
@@ -12,12 +12,15 @@ SHA1-Digest: jL4rl+dtvgbj4VErj8qjkXfGCe4=
 Name: hellotvxlet/PacmanTimer.class
 SHA1-Digest: E3IZQTtIWklRgy9dZPvHzyYHNsk=
 
+Name: hellotvxlet/PacmanVeld.class
+SHA1-Digest: YdQVcHjbrywR7c3m0ZHZPoPEJoQ=
+
 Name: hellotvxlet/Pacman.class
-SHA1-Digest: yzKsY0KY4X3CsH/rnx8AN0tzRLk=
+SHA1-Digest: CPuebPWCxhQN30BJnb3wxW3fPDA=
 
 Name: hellotvxlet/bluray.HelloTVXlet.perm
 SHA1-Digest: 84ZO/rYCyy0JStmaLbg1GDVEFhQ=
 
 Name: hellotvxlet/SpelComponent.class
-SHA1-Digest: Nz+T/zxfwdKRY8vOu3HC8rHnx9k=
+SHA1-Digest: 5pNcSTb4jnvTXaJjnV3KahHJ2jk=
 

@@ -21,7 +21,7 @@ public class HelloTVXlet implements Xlet, HActionListener {
       
       SpelComponent sComp = new SpelComponent();
       
-      sComp.setBounds(0, 0, 500, 500);
+      sComp.setBounds(0, 0, 720, 576);
       
       scene.add(sComp);
       scene.validate();

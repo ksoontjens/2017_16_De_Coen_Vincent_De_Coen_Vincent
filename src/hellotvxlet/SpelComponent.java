@@ -28,6 +28,7 @@ public class SpelComponent extends HComponent implements UserEventListener{
     private EventManager eManager;
     private Pacman pacman;
     private PacmanTimer pacmanTimer;
+    private PacmanVeld pacmanVeld;
     private Timer timer;
     
     public SpelComponent(){
@@ -38,6 +39,7 @@ public class SpelComponent extends HComponent implements UserEventListener{
         Image pacmanImage = this.getToolkit().getImage("pacman.jpg");
         pacman = new Pacman(pacmanImage);
         pacmanTimer = new PacmanTimer(pacman, this);
+        pacmanVeld = new PacmanVeld();
         timer = new Timer();
         
         init();
@@ -62,10 +64,9 @@ public class SpelComponent extends HComponent implements UserEventListener{
         super.paint(g);
         
         g.drawImage(pacman.getImage(), pacman.getX(), pacman.getY(), null);
+        
+        pacmanVeld.buildVeld(g, this);
     }
-    
-    
-
     
     public void userEventReceived(UserEvent e){
         
