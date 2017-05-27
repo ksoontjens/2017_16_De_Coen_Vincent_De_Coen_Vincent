@@ -31,6 +31,8 @@ public class SpelComponent extends HComponent implements UserEventListener{
     private PacmanVeld pacmanVeld;
     private Timer timer;
     
+    private boolean start = false;
+    
     public SpelComponent(){
         mt = new MediaTracker(this);
         repo = new UserEventRepository("repo");
@@ -58,14 +60,21 @@ public class SpelComponent extends HComponent implements UserEventListener{
         eManager.addUserEventListener(this, repo);
         
         timer.scheduleAtFixedRate(pacmanTimer, 0, 100);       
+        
+        
     }
     
     public void paint(Graphics g){
         super.paint(g);
         
-        g.drawImage(pacman.getImage(), pacman.getX(), pacman.getY(), null);
-        
+      
         pacmanVeld.buildVeld(g, this);
+        
+        pacman.paintPacman(g);
+              
+        //g.drawImage(pacman.getImage(), pacman.getX(), pacman.getY(), null);
+        
+        
     }
     
     public void userEventReceived(UserEvent e){

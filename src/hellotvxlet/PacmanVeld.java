@@ -50,15 +50,9 @@ public class PacmanVeld {
         "-*----------*--*----------*-",
         "-**************************-",
         "----------------------------"
-    };
+    };    
     
-    public int SPRITE_SIZE=15;
-    public int px=SPRITE_SIZE*1;
-    public int py=SPRITE_SIZE*1;
     
-    public int hoek=30;
-    public int r=1;
-    public boolean bekopen=true;
 
     public void buildVeld(Graphics g, HComponent context) {
         g.setColor(Color.BLACK);
@@ -68,27 +62,22 @@ public class PacmanVeld {
             for (int j = 0; j < veld[i].length(); j++) {
                 if (veld[i].charAt(j) == '-') {
                     g.setColor(Color.BLUE);
-                    g.fillRect(j * SPRITE_SIZE, i * SPRITE_SIZE, 15, 15);
+                    g.fillRect(j * Pacman.SPRITE_SIZE, i * Pacman.SPRITE_SIZE, 15, 15);
                 }else if(veld[i].charAt(j) == ':'){
                     g.setColor(Color.GRAY);
-                    g.fillRect(j * SPRITE_SIZE, i * SPRITE_SIZE, 15, 15);
+                    g.fillRect(j * Pacman.SPRITE_SIZE, i * Pacman.SPRITE_SIZE, 15, 15);
                 }else if(veld[i].charAt(j) == '*'){
                     g.setColor(Color.WHITE);
-                    g.fillOval(j * SPRITE_SIZE + 5, i * SPRITE_SIZE + 5, 5, 5);
+                    g.fillOval(j * Pacman.SPRITE_SIZE + 5, i * Pacman.SPRITE_SIZE + 5, 5, 5);
                 }else if(veld[i].charAt(j) == 'O'){
                     g.setColor(Color.PINK);
-                    g.fillOval(j * SPRITE_SIZE + 3, i * SPRITE_SIZE + 3, 8, 8);
+                    g.fillOval(j * Pacman.SPRITE_SIZE + 3, i * Pacman.SPRITE_SIZE + 3, 8, 8);
+                }else if(veld[i].charAt(j) == ','){
+                    g.setColor(Color.BLACK);
+                    g.fillRect(j * Pacman.SPRITE_SIZE, i * Pacman.SPRITE_SIZE, 15, 15);
                 }
             }
         }
 
-        g.setColor(Color.YELLOW);
-    
-        int rot = 90 * (r - 1);
-        if (bekopen) {
-            g.fillArc(px, py, SPRITE_SIZE, SPRITE_SIZE, rot + hoek, 360 - hoek * 2);
-        } else {
-            g.fillArc(px, py, SPRITE_SIZE, SPRITE_SIZE, 0, 360);
-        }
     }
 }

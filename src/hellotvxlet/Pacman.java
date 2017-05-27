@@ -5,6 +5,8 @@
 
 package hellotvxlet;
 
+import java.awt.Color;
+import java.awt.Graphics;
 import java.awt.Image;
 import org.havi.ui.HComponent;
 
@@ -17,6 +19,14 @@ public class Pacman {
     private int y;
     private Image pacman;
     
+    public int hoek=30;
+    public int r=1;
+    public boolean bekopen=true;
+    
+    public int px=SPRITE_SIZE*1;
+    public int py=SPRITE_SIZE*1;
+    
+    public static int SPRITE_SIZE=15;
     
     public Pacman(Image image){
         this.pacman = image;
@@ -46,10 +56,22 @@ public class Pacman {
         return false;
     }
     
+    public void paintPacman(Graphics g){
+        g.setColor(Color.YELLOW);
+    
+        int rot = 90 * (r - 1);
+        if (bekopen) {
+            g.fillArc(x, y, Pacman.SPRITE_SIZE, Pacman.SPRITE_SIZE, rot + hoek, 360 - hoek * 2);
+        } else {
+            g.fillArc(x, y, Pacman.SPRITE_SIZE, Pacman.SPRITE_SIZE, 0, 360);
+        }
+    }
+    
     public void move(HComponent context, char direction, int position){
         
         if(direction == 'x'){
             this.setX(this.getX() + position);
+            
             context.repaint();
         }
 
