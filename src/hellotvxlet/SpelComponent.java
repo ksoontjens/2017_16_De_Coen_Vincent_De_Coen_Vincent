@@ -30,6 +30,7 @@ public class SpelComponent extends HComponent implements UserEventListener{
     private PacmanTimer pacmanTimer;
     private PacmanVeld pacmanVeld;
     private Timer timer;
+    private Punten punten;
     
     private boolean start = false;
     
@@ -43,6 +44,7 @@ public class SpelComponent extends HComponent implements UserEventListener{
         pacmanTimer = new PacmanTimer(pacman, this);
         pacmanVeld = new PacmanVeld();
         timer = new Timer();
+        punten = new Punten();
         
         init();
     }
@@ -59,7 +61,7 @@ public class SpelComponent extends HComponent implements UserEventListener{
         repo.addAllArrowKeys();
         eManager.addUserEventListener(this, repo);
         
-        timer.scheduleAtFixedRate(pacmanTimer, 0, 100);       
+        timer.scheduleAtFixedRate(pacmanTimer, 0, 100);
         
         
     }
@@ -71,6 +73,7 @@ public class SpelComponent extends HComponent implements UserEventListener{
         pacmanVeld.buildVeld(g, this);
         
         pacman.paintPacman(g);
+        
               
         //g.drawImage(pacman.getImage(), pacman.getX(), pacman.getY(), null);
         
@@ -82,24 +85,22 @@ public class SpelComponent extends HComponent implements UserEventListener{
         if(e.getType() == HRcEvent.KEY_PRESSED){
             
           if(e.getCode()==HRcEvent.VK_LEFT){
-              pacmanTimer.setDirection('x');
-              pacmanTimer.setPosition(-8);
+              pacmanTimer.setDirection("left");
           }
           
           if(e.getCode()==HRcEvent.VK_RIGHT){              
-              pacmanTimer.setDirection('x');
-              pacmanTimer.setPosition(+8);
+              pacmanTimer.setDirection("right");
           }
           
           if(e.getCode()==HRcEvent.VK_UP){
-             pacmanTimer.setDirection('y');
-             pacmanTimer.setPosition(-8);
+             pacmanTimer.setDirection("up");
           }
           
           if(e.getCode()==HRcEvent.VK_DOWN){
-             pacmanTimer.setDirection('y');
-             pacmanTimer.setPosition(+8);
+             pacmanTimer.setDirection("down");
           }
+          
+          pacmanTimer.setPosition(8);
                       
         }
     }

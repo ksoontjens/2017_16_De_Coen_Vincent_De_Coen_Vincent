@@ -18,7 +18,7 @@ public class PacmanVeld {
      *  Breedte: 28 Vakken
      *  Hoogte: 32 Vakken
      */
-    private String[] veld = {
+    public static String[] veld = {
         "----------------------------",
         "-************--************-",
         "-*----*-----*--*-----*----*-",
@@ -62,7 +62,7 @@ public class PacmanVeld {
             for (int j = 0; j < veld[i].length(); j++) {
                 if (veld[i].charAt(j) == '-') {
                     g.setColor(Color.BLUE);
-                    g.fillRect(j * Pacman.SPRITE_SIZE, i * Pacman.SPRITE_SIZE, 15, 15);
+                    g.fillRect(j * Pacman.SPRITE_SIZE, i * Pacman.SPRITE_SIZE, 15, 15); 
                 }else if(veld[i].charAt(j) == ':'){
                     g.setColor(Color.GRAY);
                     g.fillRect(j * Pacman.SPRITE_SIZE, i * Pacman.SPRITE_SIZE, 15, 15);

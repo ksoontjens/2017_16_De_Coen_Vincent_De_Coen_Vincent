@@ -15,8 +15,8 @@ import org.havi.ui.HComponent;
  * @author student
  */
 public class Pacman {
-    private int x;
-    private int y;
+    private int x = 15;
+    private int y = 15;
     private Image pacman;
     
     public int hoek=30;
@@ -52,7 +52,35 @@ public class Pacman {
         this.y = y;
     }
     
-    public boolean hasCollided(){
+    public boolean hasCollided(String direction){
+        String[] veld = PacmanVeld.veld;
+        
+        int veldX = (this.x / Pacman.SPRITE_SIZE); //this.x / Pacman.SPRITE_SIZE;
+        int veldY = (this.y / Pacman.SPRITE_SIZE); //this.y / Pacman.SPRITE_SIZE;
+        
+        System.out.println("y: " + veldY);
+        System.out.println("x: " + veldX);
+        
+        if(veldX == 0 || veldY == 0){
+            return true;
+        }
+        
+        if(direction.equals("left") && veld[veldY].charAt(veldX - 1) == '-'){
+            return true;
+        }
+        
+        if(direction.equals("right") && veld[veldY].charAt(veldX + 1) == '-'){
+            return true;
+        }
+        
+        if(direction.equals("up") && veld[veldY - 1].charAt(veldX) == '-'){
+            return true;
+        }
+        
+        if(direction.equals("down") && veld[veldY + 1].charAt(veldX) == '-'){
+            return true;
+        }
+        
         return false;
     }
     
@@ -67,18 +95,25 @@ public class Pacman {
         }
     }
     
-    public void move(HComponent context, char direction, int position){
+    public void move(HComponent context, String direction, int position){
         
-        if(direction == 'x'){
+        if(direction.equals("left")){
+            this.setX(this.getX() - position);
+        }
+        
+        if(direction.equals("right")){
             this.setX(this.getX() + position);
-            
-            context.repaint();
         }
 
-        if (direction == 'y') {
-            this.setY(this.getY() + position);
-            context.repaint();
+        if (direction.equals("up")) {
+            this.setY(this.getY() - position);
         }
+        
+        if (direction.equals("down")) {
+            this.setY(this.getY() + position);
+        }
+        
+        context.repaint();
         
     }
    

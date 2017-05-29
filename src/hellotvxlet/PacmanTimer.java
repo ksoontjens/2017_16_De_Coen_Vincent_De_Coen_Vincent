@@ -15,7 +15,7 @@ import org.havi.ui.HComponent;
 public class PacmanTimer extends TimerTask{
     private Pacman pacman;
     private HComponent context;
-    private char direction;
+    private String direction = "";
     private int position;
     
     public PacmanTimer(Pacman pacman, HComponent context){
@@ -23,7 +23,7 @@ public class PacmanTimer extends TimerTask{
         this.context = context;
     }
     
-    public void setDirection(char direction){
+    public void setDirection(String direction){
         this.direction = direction;
     }
     
@@ -32,6 +32,10 @@ public class PacmanTimer extends TimerTask{
     }
     
     public void run(){
-        pacman.move(context, direction, position);
+       System.out.println(direction);
+     
+       if(!pacman.hasCollided(direction)){
+           pacman.move(context, direction, position);
+       }
     }
 }
