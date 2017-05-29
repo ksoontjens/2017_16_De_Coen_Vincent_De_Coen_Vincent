@@ -18,6 +18,7 @@ public class Pacman {
     private int x = 15;
     private int y = 15;
     private Image pacman;
+    private Punten punten;
     
     public int hoek=30;
     public int r=1;
@@ -30,6 +31,7 @@ public class Pacman {
     
     public Pacman(Image image){
         this.pacman = image;
+        this.punten = new Punten();
     }
     
     public Image getImage(){
@@ -79,6 +81,18 @@ public class Pacman {
         
         if(direction.equals("down") && veld[veldY + 1].charAt(veldX) == '-'){
             return true;
+        }
+        
+        if(veld[veldY].charAt(veldX) == '*'){
+            punten.takePunt();
+            System.out.println(punten.punten);
+            
+            char[] newVeld = veld[veldY].toCharArray();
+            newVeld[veldX] = ',';
+            
+            veld[veldY] = String.valueOf(newVeld);
+            
+            
         }
         
         return false;

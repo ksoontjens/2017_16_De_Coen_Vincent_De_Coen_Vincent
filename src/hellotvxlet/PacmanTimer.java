@@ -18,6 +18,7 @@ public class PacmanTimer extends TimerTask{
     private String direction = "";
     private int position;
     
+    
     public PacmanTimer(Pacman pacman, HComponent context){
         this.pacman = pacman;
         this.context = context;
@@ -37,5 +38,6 @@ public class PacmanTimer extends TimerTask{
        if(!pacman.hasCollided(direction)){
            pacman.move(context, direction, position);
        }
+       
     }
 }
