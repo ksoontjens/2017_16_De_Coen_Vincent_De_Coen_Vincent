@@ -15,8 +15,8 @@ import org.havi.ui.HComponent;
  * @author student
  */
 public class Pacman {
-    private int x = 15;
-    private int y = 15;
+    private int x = SPRITE_SIZE;
+    private int y = SPRITE_SIZE;
     private Image pacman;
     private Punten punten;
     
@@ -27,7 +27,7 @@ public class Pacman {
     public int px=SPRITE_SIZE*1;
     public int py=SPRITE_SIZE*1;
     
-    public static int SPRITE_SIZE=15;
+    public static int SPRITE_SIZE=16;
     
     public Pacman(Image image){
         this.pacman = image;
@@ -57,42 +57,52 @@ public class Pacman {
     public boolean hasCollided(String direction){
         String[] veld = PacmanVeld.veld;
         
-        int veldX = (this.x / Pacman.SPRITE_SIZE); //this.x / Pacman.SPRITE_SIZE;
-        int veldY = (this.y / Pacman.SPRITE_SIZE); //this.y / Pacman.SPRITE_SIZE;
+        int veldX = (int) Math.round((double)this.x / (double)Pacman.SPRITE_SIZE);
+        int veldY = (int) Math.round((double)this.y / (double)Pacman.SPRITE_SIZE);
         
-        System.out.println("y: " + veldY);
-        System.out.println("x: " + veldX);
+        System.out.println("x: " + this.x + " veldx: " + veldX);
+        System.out.println("y: " + this.y + " veldy: " + veldY);
         
+        
+        /*
+        TODO: als je pacman draait en je kan nog niet draaien, draai hem op de 
+        eerst mogelijke bocht naar richting dat geselecteerd is met toetsenbord
+         */
         if(veldX == 0 || veldY == 0){
             return true;
         }
         
         if(direction.equals("left") && veld[veldY].charAt(veldX - 1) == '-'){
+            this.setX(veldX * Pacman.SPRITE_SIZE);
+            this.setY(veldY * Pacman.SPRITE_SIZE);
             return true;
         }
         
         if(direction.equals("right") && veld[veldY].charAt(veldX + 1) == '-'){
+            this.setX(veldX * Pacman.SPRITE_SIZE);
+            this.setY(veldY * Pacman.SPRITE_SIZE);
             return true;
         }
         
         if(direction.equals("up") && veld[veldY - 1].charAt(veldX) == '-'){
+            this.setX(veldX * Pacman.SPRITE_SIZE);
+            this.setY(veldY * Pacman.SPRITE_SIZE);
             return true;
         }
         
         if(direction.equals("down") && veld[veldY + 1].charAt(veldX) == '-'){
+            this.setX(veldX * Pacman.SPRITE_SIZE);
+            this.setY(veldY * Pacman.SPRITE_SIZE);
             return true;
         }
         
         if(veld[veldY].charAt(veldX) == '*'){
             punten.takePunt();
-            System.out.println(punten.punten);
-            
+  
             char[] newVeld = veld[veldY].toCharArray();
             newVeld[veldX] = ',';
             
-            veld[veldY] = String.valueOf(newVeld);
-            
-            
+            veld[veldY] = String.valueOf(newVeld);            
         }
         
         return false;

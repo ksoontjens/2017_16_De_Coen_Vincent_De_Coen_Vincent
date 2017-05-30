@@ -41,8 +41,8 @@ public class SpelComponent extends HComponent implements UserEventListener{
         
         Image pacmanImage = this.getToolkit().getImage("pacman.jpg");
         pacman = new Pacman(pacmanImage);
-        pacmanTimer = new PacmanTimer(pacman, this);
         pacmanVeld = new PacmanVeld();
+        pacmanTimer = new PacmanTimer(pacman, pacmanVeld, this);
         timer = new Timer();
         punten = new Punten();
         
@@ -61,7 +61,7 @@ public class SpelComponent extends HComponent implements UserEventListener{
         repo.addAllArrowKeys();
         eManager.addUserEventListener(this, repo);
         
-        timer.scheduleAtFixedRate(pacmanTimer, 0, 100);
+        timer.scheduleAtFixedRate(pacmanTimer, 0, 80);
         
         
     }
@@ -82,22 +82,23 @@ public class SpelComponent extends HComponent implements UserEventListener{
     
     public void userEventReceived(UserEvent e){
         
+        
         if(e.getType() == HRcEvent.KEY_PRESSED){
-            
+                     
           if(e.getCode()==HRcEvent.VK_LEFT){
-              pacmanTimer.setDirection("left");
+              pacmanTimer.setNextDirection("left");
           }
           
           if(e.getCode()==HRcEvent.VK_RIGHT){              
-              pacmanTimer.setDirection("right");
+              pacmanTimer.setNextDirection("right");
           }
           
           if(e.getCode()==HRcEvent.VK_UP){
-             pacmanTimer.setDirection("up");
+             pacmanTimer.setNextDirection("up");
           }
           
           if(e.getCode()==HRcEvent.VK_DOWN){
-             pacmanTimer.setDirection("down");
+             pacmanTimer.setNextDirection("down");
           }
           
           pacmanTimer.setPosition(8);
