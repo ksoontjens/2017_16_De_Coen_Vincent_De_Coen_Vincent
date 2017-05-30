@@ -5,6 +5,7 @@
 
 package hellotvxlet;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.MediaTracker;
@@ -26,9 +27,18 @@ public class SpelComponent extends HComponent implements UserEventListener{
     private MediaTracker mt;
     private UserEventRepository repo;
     private EventManager eManager;
+    
+    /*Characters*/
     private Pacman pacman;
+    private Ghost ghostBlue;
+    private Ghost ghostOrange;
+    private Ghost ghostRed;
+    private Ghost ghostYellow;
+    
+    
     private PacmanTimer pacmanTimer;
     private PacmanVeld pacmanVeld;
+    
     private Timer timer;
     private Punten punten;
     
@@ -39,10 +49,17 @@ public class SpelComponent extends HComponent implements UserEventListener{
         repo = new UserEventRepository("repo");
         eManager = EventManager.getInstance();
         
-        Image pacmanImage = this.getToolkit().getImage("pacman.jpg");
-        pacman = new Pacman(pacmanImage);
+        pacman = new Pacman();
+        ghostBlue = new Ghost(20, 20, Color.CYAN);
+        ghostOrange = new Ghost(5, 5, Color.ORANGE);
+        ghostRed = new Ghost(10, 10, Color.RED);
+        ghostYellow = new Ghost(2, 2, Color.YELLOW);
+        
         pacmanVeld = new PacmanVeld();
-        pacmanTimer = new PacmanTimer(pacman, pacmanVeld, this);
+        
+        Ghost[] ghosts = {ghostBlue, ghostOrange, ghostRed, ghostYellow};   
+        pacmanTimer = new PacmanTimer(pacman, pacmanVeld, this, ghosts);
+        
         timer = new Timer();
         punten = new Punten();
         
@@ -50,7 +67,7 @@ public class SpelComponent extends HComponent implements UserEventListener{
     }
     
     public void init(){
-        mt.addImage(pacman.getImage(), 1);
+        
         
         try{
             mt.waitForAll();
@@ -73,6 +90,11 @@ public class SpelComponent extends HComponent implements UserEventListener{
         pacmanVeld.buildVeld(g, this);
         
         pacman.paintPacman(g);
+        
+        ghostBlue.paintGhost(g);
+        ghostOrange.paintGhost(g);
+        ghostRed.paintGhost(g);
+        ghostYellow.paintGhost(g);
         
               
         //g.drawImage(pacman.getImage(), pacman.getX(), pacman.getY(), null);
@@ -101,7 +123,7 @@ public class SpelComponent extends HComponent implements UserEventListener{
              pacmanTimer.setNextDirection("down");
           }
           
-          pacmanTimer.setPosition(8);
+          pacmanTimer.setPosition(6);
                       
         }
     }

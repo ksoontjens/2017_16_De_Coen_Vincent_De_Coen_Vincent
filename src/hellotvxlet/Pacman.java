@@ -17,7 +17,7 @@ import org.havi.ui.HComponent;
 public class Pacman {
     private int x = SPRITE_SIZE;
     private int y = SPRITE_SIZE;
-    private Image pacman;
+ 
     private Punten punten;
     
     public int hoek=30;
@@ -29,13 +29,8 @@ public class Pacman {
     
     public static int SPRITE_SIZE=16;
     
-    public Pacman(Image image){
-        this.pacman = image;
+    public Pacman(){
         this.punten = new Punten();
-    }
-    
-    public Image getImage(){
-        return this.pacman;
     }
     
     public int getX(){
@@ -44,6 +39,14 @@ public class Pacman {
     
     public int getY(){
         return this.y;
+    }
+    
+    public void incrementY(int number){
+        this.y = this.y + number;
+    }
+    
+    public void incrementX(int number){
+        this.x = this.x + number;
     }
     
     public void setX(int x){
@@ -58,16 +61,8 @@ public class Pacman {
         String[] veld = PacmanVeld.veld;
         
         int veldX = (int) Math.round((double)this.x / (double)Pacman.SPRITE_SIZE);
-        int veldY = (int) Math.round((double)this.y / (double)Pacman.SPRITE_SIZE);
+        int veldY = (int) Math.round((double)this.y / (double)Pacman.SPRITE_SIZE);        
         
-        System.out.println("x: " + this.x + " veldx: " + veldX);
-        System.out.println("y: " + this.y + " veldy: " + veldY);
-        
-        
-        /*
-        TODO: als je pacman draait en je kan nog niet draaien, draai hem op de 
-        eerst mogelijke bocht naar richting dat geselecteerd is met toetsenbord
-         */
         if(veldX == 0 || veldY == 0){
             return true;
         }

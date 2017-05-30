@@ -14,6 +14,7 @@ import org.havi.ui.HComponent;
  */
 public class PacmanTimer extends TimerTask{
     private Pacman pacman;
+    private Ghost[] ghosts;
     private PacmanVeld veld;
     private HComponent context;
     private String direction = "";
@@ -21,8 +22,9 @@ public class PacmanTimer extends TimerTask{
     private int position;
     
     
-    public PacmanTimer(Pacman pacman, PacmanVeld veld, HComponent context){
+    public PacmanTimer(Pacman pacman, PacmanVeld veld, HComponent context, Ghost[] ghosts){
         this.pacman = pacman;
+        this.ghosts = ghosts;
         this.veld = veld;
         this.context = context;
     }
@@ -51,6 +53,20 @@ public class PacmanTimer extends TimerTask{
         int veldX = (int) Math.round((double)pacman.getX() / (double)Pacman.SPRITE_SIZE);
         int veldY = (int) Math.round((double)pacman.getY() / (double)Pacman.SPRITE_SIZE);
         
+        if(!pacman.hasCollided(direction)){
+           pacman.move(context, direction, position);
+        }
+        
+        for(int ghost = 0; ghost < ghosts.length; ghost++){
+            if(!ghosts[ghost].hasCollided()){
+                ghosts[ghost].move(context, position);
+            }
+        }
+        
+        if(veldY * Pacman.SPRITE_SIZE != pacman.getY() || veldX * Pacman.SPRITE_SIZE != pacman.getX()){
+            return;
+        }
+        
         if(!this.nextDirection.equals("")){
             if(this.nextDirection.equals("left")){
                 veldX--;
@@ -66,11 +82,13 @@ public class PacmanTimer extends TimerTask{
                 this.direction = this.nextDirection;
                 this.nextDirection = "";
             }
+                    
+          
+            
         }
 
-        if(!pacman.hasCollided(direction)){
-           pacman.move(context, direction, position);
-        }
+        
+        
        
     }
 }
