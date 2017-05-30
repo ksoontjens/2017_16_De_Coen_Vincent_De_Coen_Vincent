@@ -20,7 +20,7 @@ public class PacmanTimer extends TimerTask{
     private String direction = "";
     private String nextDirection = "";
     private int position;
-    
+
     
     public PacmanTimer(Pacman pacman, PacmanVeld veld, HComponent context, Ghost[] ghosts){
         this.pacman = pacman;
@@ -62,10 +62,11 @@ public class PacmanTimer extends TimerTask{
                 ghosts[ghost].move(context, position);
             }
         }
-        
+        /*
         if(veldY * Pacman.SPRITE_SIZE != pacman.getY() || veldX * Pacman.SPRITE_SIZE != pacman.getX()){
             return;
         }
+         * */
         
         if(!this.nextDirection.equals("")){
             if(this.nextDirection.equals("left")){

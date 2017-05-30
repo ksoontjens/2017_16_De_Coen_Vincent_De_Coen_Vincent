@@ -61,7 +61,9 @@ public class Pacman {
         String[] veld = PacmanVeld.veld;
         
         int veldX = (int) Math.round((double)this.x / (double)Pacman.SPRITE_SIZE);
-        int veldY = (int) Math.round((double)this.y / (double)Pacman.SPRITE_SIZE);        
+        int veldY = (int) Math.round((double)this.y / (double)Pacman.SPRITE_SIZE);    
+        
+        
         
         if(veldX == 0 || veldY == 0){
             return true;
@@ -70,24 +72,36 @@ public class Pacman {
         if(direction.equals("left") && veld[veldY].charAt(veldX - 1) == '-'){
             this.setX(veldX * Pacman.SPRITE_SIZE);
             this.setY(veldY * Pacman.SPRITE_SIZE);
+            if(veldY * Pacman.SPRITE_SIZE != this.getY() || veldX * Pacman.SPRITE_SIZE != this.getX()){
+                return false;
+            }
             return true;
         }
         
         if(direction.equals("right") && veld[veldY].charAt(veldX + 1) == '-'){
             this.setX(veldX * Pacman.SPRITE_SIZE);
             this.setY(veldY * Pacman.SPRITE_SIZE);
+            if(veldY * Pacman.SPRITE_SIZE != this.getY() || veldX * Pacman.SPRITE_SIZE != this.getX()){
+                return false;
+            }
             return true;
         }
         
         if(direction.equals("up") && veld[veldY - 1].charAt(veldX) == '-'){
             this.setX(veldX * Pacman.SPRITE_SIZE);
             this.setY(veldY * Pacman.SPRITE_SIZE);
+            if(veldY * Pacman.SPRITE_SIZE != this.getY() || veldX * Pacman.SPRITE_SIZE != this.getX()){
+                return false;
+            }
             return true;
         }
         
         if(direction.equals("down") && veld[veldY + 1].charAt(veldX) == '-'){
             this.setX(veldX * Pacman.SPRITE_SIZE);
             this.setY(veldY * Pacman.SPRITE_SIZE);
+            if(veldY * Pacman.SPRITE_SIZE != this.getY() || veldX * Pacman.SPRITE_SIZE != this.getX()){
+                return false;
+            }
             return true;
         }
         
