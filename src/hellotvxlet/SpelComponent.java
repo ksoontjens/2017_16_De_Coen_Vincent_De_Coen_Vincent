@@ -34,6 +34,7 @@ public class SpelComponent extends HComponent implements UserEventListener{
     private Ghost ghostOrange;
     private Ghost ghostRed;
     private Ghost ghostYellow;
+    private Graphics g;
     
     
     private PacmanTimer pacmanTimer;
@@ -51,9 +52,9 @@ public class SpelComponent extends HComponent implements UserEventListener{
         
         pacman = new Pacman();
         ghostBlue = new Ghost(20, 20, Color.CYAN);
-        ghostOrange = new Ghost(5, 5, Color.ORANGE);
+        ghostOrange = new Ghost(5, 15, Color.ORANGE);
         ghostRed = new Ghost(10, 10, Color.RED);
-        ghostYellow = new Ghost(2, 2, Color.YELLOW);
+        ghostYellow = new Ghost(20, 2, Color.YELLOW);
         
         pacmanVeld = new PacmanVeld();
         
@@ -86,6 +87,8 @@ public class SpelComponent extends HComponent implements UserEventListener{
     public void paint(Graphics g){
         super.paint(g);
         
+        this.g = g;
+        
       
         pacmanVeld.buildVeld(g, this);
         
@@ -96,6 +99,7 @@ public class SpelComponent extends HComponent implements UserEventListener{
         ghostRed.paintGhost(g);
         ghostYellow.paintGhost(g);
         
+        punten.paintScore(g);
               
         //g.drawImage(pacman.getImage(), pacman.getX(), pacman.getY(), null);
         

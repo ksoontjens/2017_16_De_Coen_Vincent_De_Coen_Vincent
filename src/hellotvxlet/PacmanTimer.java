@@ -5,6 +5,7 @@
 
 package hellotvxlet;
 
+import java.awt.Graphics;
 import java.util.TimerTask;
 import org.havi.ui.HComponent;
 
@@ -20,7 +21,8 @@ public class PacmanTimer extends TimerTask{
     private String direction = "";
     private String nextDirection = "";
     private int position;
-
+    private Graphics g;
+    private boolean gameOver = false;
     
     public PacmanTimer(Pacman pacman, PacmanVeld veld, HComponent context, Ghost[] ghosts){
         this.pacman = pacman;
@@ -49,6 +51,23 @@ public class PacmanTimer extends TimerTask{
         this.position = position;
     }
     
+    public boolean gameStatus(){
+        return this.gameOver;
+    }
+    
+    public void checkGameOver(int ghostX, int ghostY, int pacmanX, int pacmanY){
+        if(ghostX == pacmanX  && ghostY == pacmanY){
+            this.gameOver = true;
+        }
+    }
+    
+    public void endGame(HComponent context){
+        veld = null;
+        veld.buildVeld(g, context);
+        
+        context.repaint();
+    }
+    
     public void run(){
         int veldX = (int) Math.round((double)pacman.getX() / (double)Pacman.SPRITE_SIZE);
         int veldY = (int) Math.round((double)pacman.getY() / (double)Pacman.SPRITE_SIZE);
@@ -61,6 +80,19 @@ public class PacmanTimer extends TimerTask{
             if(!ghosts[ghost].hasCollided()){
                 ghosts[ghost].move(context, position);
             }
+            
+            int ghostVeldX = (int) Math.round((double)ghosts[ghost].getX() / (double)Pacman.SPRITE_SIZE);
+            int ghostVeldY = (int) Math.round((double)ghosts[ghost].getY() / (double)Pacman.SPRITE_SIZE); 
+            int pacmanVeldX = (int) Math.round((double)pacman.getX() / (double)Pacman.SPRITE_SIZE);
+            int pacmanVeldY = (int) Math.round((double)pacman.getY() / (double)Pacman.SPRITE_SIZE);
+            
+            checkGameOver(ghostVeldX, ghostVeldY, pacmanVeldX, pacmanVeldY);
+            
+            if(this.gameOver){
+                this.cancel();
+                this.endGame(context);
+            }
+            
         }
         /*
         if(veldY * Pacman.SPRITE_SIZE != pacman.getY() || veldX * Pacman.SPRITE_SIZE != pacman.getX()){

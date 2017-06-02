@@ -25,6 +25,7 @@ public class Ghost {
     private Color color;
     private String direction = "up";
     private ArrayList directions = new ArrayList();
+    private ArrayList prevDirections = new ArrayList();
     String[] veld = PacmanVeld.veld;
     
     public Ghost(int veldX, int veldY, Color color){
@@ -51,7 +52,7 @@ public class Ghost {
     
     public void paintGhost(Graphics g){
         g.setColor(this.color);
-    
+        
         g.fillRoundRect(this.x, this.y, Pacman.SPRITE_SIZE, Pacman.SPRITE_SIZE, 4, 14);
     }
     
@@ -109,6 +110,55 @@ public class Ghost {
         this.direction = directions.get(randomDirection).toString();
         
         directions.clear();
+    }
+    
+    public boolean hasCollidedExperiment(){
+        veldX = (int) Math.round((double)this.x / (double)Pacman.SPRITE_SIZE);
+        veldY = (int) Math.round((double)this.y / (double)Pacman.SPRITE_SIZE);
+        
+        if(veld[veldY].charAt(veldX - 1) != '-'){
+            prevDirections.add("left");
+        }
+        
+        if(veld[veldY].charAt(veldX + 1) != '-'){
+            prevDirections.add("right");
+        }
+        
+        if(veld[veldY - 1].charAt(veldX) != '-'){
+            prevDirections.add("up");
+        }
+        
+        if(veld[veldY + 1].charAt(veldX) != '-'){
+            prevDirections.add("down");
+        }
+        
+        if(prevDirections.size() != directions.size()){
+            Random random = new Random();
+            
+            /* spastische geesten vermijden */
+            int randomDirection = random.nextInt(100);
+            
+            for(int directionItem = 0; directionItem < directions.size(); directionItem++){
+               //Change direction on collision
+               if(prevDirections.get(directionItem) == direction){
+                    this.setX(veldX * Pacman.SPRITE_SIZE);
+                    this.setY(veldY * Pacman.SPRITE_SIZE);
+                    changeCourse();
+               }
+            }
+            
+            //change direction maybe on intersect
+            if(randomDirection < 25){
+                this.setX(veldX * Pacman.SPRITE_SIZE);
+                this.setY(veldY * Pacman.SPRITE_SIZE);
+            
+                changeCourse();
+            }
+        }
+        
+        prevDirections.clear();
+        
+        return false;
     }
     
     public boolean hasCollided(){
