@@ -51,10 +51,10 @@ public class SpelComponent extends HComponent implements UserEventListener{
         eManager = EventManager.getInstance();
         
         pacman = new Pacman();
-        ghostBlue = new Ghost(20, 20, Color.CYAN);
-        ghostOrange = new Ghost(5, 15, Color.ORANGE);
-        ghostRed = new Ghost(10, 10, Color.RED);
-        ghostYellow = new Ghost(20, 2, Color.YELLOW);
+        ghostBlue = new Ghost(14, 11, Color.CYAN);
+        ghostOrange = new Ghost(15, 11, Color.ORANGE);
+        ghostRed = new Ghost(11, 11, Color.RED);
+        ghostYellow = new Ghost(13, 11, Color.YELLOW);
         
         pacmanVeld = new PacmanVeld();
         
@@ -79,7 +79,7 @@ public class SpelComponent extends HComponent implements UserEventListener{
         repo.addAllArrowKeys();
         eManager.addUserEventListener(this, repo);
         
-        timer.scheduleAtFixedRate(pacmanTimer, 0, 80);
+        timer.scheduleAtFixedRate(pacmanTimer, 0, 60);
         
         
     }
