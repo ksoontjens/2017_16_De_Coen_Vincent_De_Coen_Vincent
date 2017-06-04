@@ -24,11 +24,12 @@ public class PacmanTimer extends TimerTask{
     private Graphics g;
     private boolean gameOver = false;
     
-    public PacmanTimer(Pacman pacman, PacmanVeld veld, HComponent context, Ghost[] ghosts){
+    public PacmanTimer(Pacman pacman, PacmanVeld veld, HComponent context, Ghost[] ghosts, Graphics g){
         this.pacman = pacman;
         this.ghosts = ghosts;
         this.veld = veld;
         this.context = context;
+        this.g = g;
     }
     
     public void setDirection(String direction){
@@ -62,8 +63,7 @@ public class PacmanTimer extends TimerTask{
     }
     
     public void endGame(HComponent context){
-        veld = null;
-        veld.buildVeld(g, context);
+        veld.start = false;
         
         context.repaint();
     }
@@ -89,8 +89,9 @@ public class PacmanTimer extends TimerTask{
             checkGameOver(ghostVeldX, ghostVeldY, pacmanVeldX, pacmanVeldY);
             
             if(this.gameOver){
-                this.cancel();
                 this.endGame(context);
+                this.cancel();
+                
             }
             
         }
